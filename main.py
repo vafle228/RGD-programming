@@ -17,8 +17,13 @@ class Station:
             if s_ways is not None:
                 s_ways.filling = train
                 print('Поезд {train_name} занял линию {name}'.format(name=s_ways.name,
-                                                                     train_name=s_ways.filling.name))
+                                                                     train_name=s_ways.filling.name)
                 return train
+            
+            if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and \
+               (train not in arrived_trains):
+                print('Поезд {} не заехал на станцию'.format(train.name))
+                trains.remove(train)
         return None
 
     def trains_input(self, trains, function):
