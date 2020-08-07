@@ -7,11 +7,11 @@ class Station:
         for i in range(ways):
             while True:
                 try:
-                    capacity = int(input('Введите объем: '))
+                    capacity = int(input('Введите длину линии: '))
                     if capacity < 0:
                         print('Не понял, зачем отрицательные числа вводишь?')
                         continue
-                    name = input('Введите имя: ')
+                    name = input('Введите название линии: ')
                     self.ways.append(Way(capacity, name))
                     break
                 except ValueError:
@@ -62,7 +62,7 @@ class Train:
 
 trains = []
 arrived_trains = []
-station = Station(3)
+station = Station(int(input('Введите количество линий на станции: ')))
 
 while True:
     n = input('Сколько поездов подъезжает: ')
@@ -72,9 +72,9 @@ while True:
     break
 
 for _ in range(int(n)):
-    train_name = input('Введите имя поезда: ')
+    train_name = input('Введите название поезда: ')
     while True:
-        train_capacity = input('Введите вместимость: ')
+        train_capacity = input('Введите длину поезда: ')
         if train_capacity.isdigit():
             if int(train_capacity) >= 0:
                 break
