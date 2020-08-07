@@ -18,12 +18,16 @@ class Station:
                     print("Не понял, что началось то? Нормально общались!")
 
     def fill(self, train):
-        _min = None
+        s_ways = []
         for way in self.ways:
-            if (way.capacity >= train.capacity) and (way.filling is None) \
-               and (_min is None or _min > way.capacity):
-                _min = way
-        if _min is not None:
+            if train.capacity <= way.capacity and way.filling is None:
+                s_ways.append(way)
+
+        if len(s_ways):
+            _min = s_ways[0]
+            for s_way in s_ways:
+                if _min.capacity > s_way.capacity:
+                    _min = s_way
             _min.filling = train
             return 'Поезд {train_name} занял линию {name}'.format(name=_min.name,
                                                                   train_name=_min.filling.name)
@@ -58,7 +62,7 @@ class Train:
 
 trains = []
 arrived_trains = []
-station = Station(1)
+station = Station(3)
 
 while True:
     n = input('Сколько поездов подъезжает: ')
