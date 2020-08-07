@@ -18,16 +18,12 @@ class Station:
                     print("Не понял, что началось то? Нормально общались!")
 
     def fill(self, train):
-        s_ways = []
+        _min = None
         for way in self.ways:
-            if train.capacity <= way.capacity and way.filling is None:
-                s_ways.append(way)
-
-        if len(s_ways):
-            _min = s_ways[0]
-            for s_way in s_ways:
-                if _min.capacity > s_way.capacity:
-                    _min = s_way
+            if (way.capacity >= train.capacity) and (way.filling is None) \
+               and (_min is None or _min > way.capacity):
+                _min = way
+        if _min is not None:
             _min.filling = train
             return 'Поезд {train_name} занял линию {name}'.format(name=_min.name,
                                                                   train_name=_min.filling.name)
@@ -42,6 +38,7 @@ class Station:
                                                                        train_name=self.ways[i].filling.name)
                 self.ways[i].filling = None
                 return out
+        return None
 
 
 class Way:
@@ -61,14 +58,13 @@ class Train:
 
 trains = []
 arrived_trains = []
-station = Station(1)
+station = Station(2)
 
 while True:
     n = input('Сколько поездов подъезжает: ')
     if not n.isdigit():
-        if int(n) >= 0:
-            print('Не понял, что за бред ты мне ввел?')
-            continue
+        print('Не понял, что за бред ты мне ввел?')
+        continue
     break
 
 for _ in range(int(n)):
@@ -106,7 +102,6 @@ while True:
         if (time.strptime(time.strftime('%H%M'), '%H%M') == trains[j].arrive_time) and \
                 (trains[j] not in arrived_trains):
             result = station.fill(trains[j])
-            print(j, trains[j].name)
             if not result:
                 print('Поезд {} не смог заехать'.format(trains[j].name))
                 continue
