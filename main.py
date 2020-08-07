@@ -58,7 +58,7 @@ class Train:
 
 trains = []
 arrived_trains = []
-station = Station(2)
+station = Station(1)
 
 while True:
     n = input('Сколько поездов подъезжает: ')
