@@ -65,9 +65,10 @@ station = Station(1)
 
 while True:
     n = input('Сколько поездов подъезжает: ')
-    if not n.isdigit() and n >= 0:
-        print('Не понял, что за бред ты мне ввел?')
-        continue
+    if not n.isdigit():
+        if int(n) >= 0:
+            print('Не понял, что за бред ты мне ввел?')
+            continue
     break
 
 for _ in range(int(n)):
