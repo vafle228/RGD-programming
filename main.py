@@ -7,9 +7,9 @@ class Station:
 
     def fill(self, train):
         s_ways = None
-        for way in self.ways:
-            if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and \
-               (train not in arrived_trains):
+        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and \
+           (train not in arrived_trains):
+            for way in self.ways:
                 if train.capacity <= way.capacity and way.filling is None \
                         and (s_ways is None or s_ways.capacity > way.capacity):
                     s_ways = way
@@ -17,11 +17,9 @@ class Station:
             if s_ways is not None:
                 s_ways.filling = train
                 print('Поезд {train_name} занял линию {name}'.format(name=s_ways.name,
-                                                                     train_name=s_ways.filling.name)
+                                                                         train_name=s_ways.filling.name))
                 return train
-            
-            if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and \
-               (train not in arrived_trains):
+            else:
                 print('Поезд {} не заехал на станцию'.format(train.name))
                 trains.remove(train)
         return None
@@ -36,14 +34,16 @@ class Station:
         return result
 
     def out_fill(self, train):
-        for way in self.ways:
-            if way.filling is None:
-                continue
-            elif way.filling.name == train.name:
-                print('Поезд {train_name} покинул линию {name}'.format(name=way.name,
-                                                                       train_name=way.filling.name))
-                way.filling = None
-                return train
+        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.out_time) and \
+           (train in arrived_trains):
+            for way in self.ways:
+                if way.filling is None:
+                    continue
+                elif way.filling.name == train.name:
+                    print('Поезд {train_name} покинул линию {name}'.format(name=way.name,
+                                                                           train_name=way.filling.name))
+                    way.filling = None
+                    return train
         return None
 
 
@@ -78,16 +78,16 @@ def valid(data, p_type):
     return None
 
 
-ways = [Way(10, 'a')]
-trains = [Train(10, 'qwerty1', '1450', '1530')]
+ways = [Way(12, 'линия 10'), Way(13, 'Линия 12')]
+trains = [Train(10, 'поезд 1', '00:36', '0037'), Train(10, 'поезд 2', '0036', '0036')]
 station = Station(ways)
 
 arrived_trains = []
 outing_trains = []
 
-while trains:
+while trains or arrived_trains:
 
-    arrived_trains = station.trains_input(trains, station.fill)
+    arrived_trains = station.trains_input(trains, station.fill) or arrived_trains
 
     for arrived_train in arrived_trains:
         if arrived_train in trains:
