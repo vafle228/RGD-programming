@@ -18,9 +18,10 @@ class Station:
                     print("Не понял, что началось то? Нормально общались!")
 
     def fill(self, train):
-        s_ways = []
+        s_ways = None
         for way in self.ways:
-            if train.capacity <= way.capacity and way.filling is None:
+            if train.capacity <= way.capacity and way.filling is None \
+               and (s_ways is None or s_ways.capacity > way.capacity):
                 s_ways.append(way)
 
         if len(s_ways):
@@ -59,7 +60,15 @@ class Train:
         self.arrive_time = time.strptime(arrive_time, '%H%M')
         self.out_time = time.strptime(out_time, '%H%M')
 
-
+'''
+def fill(self, train):
+        w_min = None
+        for i in self.ways:
+            if (train.train_len <= i.way_len) and (i.tr is None) and ():
+                w_min = i
+        if w_min != None:
+            w_min.add(train)
+'''
 trains = []
 arrived_trains = []
 station = Station(int(input('Введите количество линий на станции: ')))
