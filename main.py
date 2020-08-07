@@ -8,11 +8,11 @@ class Station:
             while True:
                 try:
                     capacity = int(input('Введите объем: '))
+                    if capacity < 0:
+                        print('Не понял, зачем отрицательные числа вводишь?')
+                        continue
                     name = input('Введите имя: ')
-                    if capacity >= 0:
-                        self.ways.append(Way(capacity, name))
-                    else:
-                        print('Не понял, самый умный?')
+                    self.ways.append(Way(capacity, name))
                     break
                 except ValueError:
                     print("Не понял, что началось то? Нормально общались!")
@@ -74,8 +74,9 @@ for _ in range(int(n)):
     train_name = input('Введите имя поезда: ')
     while True:
         train_capacity = input('Введите вместимость: ')
-        if train_capacity.isdigit() and train_capacity >= 0:
-            break
+        if train_capacity.isdigit():
+            if int(train_capacity) >= 0:
+                break
     while True:
         try:
             train_arriving = input('Введите время прибытия: ')
@@ -95,6 +96,7 @@ for _ in range(int(n)):
         except ValueError:
             continue
     trains.append(Train(train_name, train_capacity, train_arriving, train_outing))
+
 trains = sorted(trains, key=lambda train: (train.out_time.tm_hour * 60 + train.out_time.tm_min) -
                                           (train.arrive_time.tm_hour * 60 + train.arrive_time.tm_min))
 
