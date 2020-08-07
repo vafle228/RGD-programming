@@ -44,17 +44,17 @@ class Station:
 
 class Way:
     def __init__(self, capacity, name, train=None):
-        self.capacity = valid(capacity, 'int')
+        self.capacity = valid(capacity, 'int') or 1
         self.name = name
         self.filling = train
 
 
 class Train:
     def __init__(self, capacity, name, arrive_time, out_time):
-        self.capacity = valid(capacity, 'int')
+        self.capacity = valid(capacity, 'int') or 1
         self.name = name
-        self.arrive_time = valid(arrive_time, 'time')
-        self.out_time = valid(out_time, time)
+        self.arrive_time = valid(arrive_time, 'time') or time.strptime('0000', '%H%M')
+        self.out_time = valid(out_time, 'time') or time.strptime('0000', '%H%M')
 
 
 def valid(data, p_type):
@@ -70,10 +70,11 @@ def valid(data, p_type):
             return time.strptime(data, '%H%M')
         except ValueError:
             return None
+    return None
 
 
 ways = [Way(10, 'a')]
-trains = [Train(10, 'qwerty1', '1814', '1814')]
+trains = [Train(10, 'qwerty1', '1450', '1530')]
 station = Station(ways)
 
 arrived_trains = []
