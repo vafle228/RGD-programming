@@ -60,9 +60,14 @@ class Train:
         self.arrive_time = time.strptime(arrive_time, '%H%M')
         self.out_time = time.strptime(out_time, '%H%M')
 
+
 trains = []
 arrived_trains = []
-station = Station(int(input('Введите количество линий на станции: ')))
+while True:
+    lines = input('Введите количество линий на станции: ')
+    if lines.isdigit():
+        break
+station = Station(int(lines))
 
 while True:
     n = input('Сколько поездов подъезжает: ')
@@ -72,7 +77,7 @@ while True:
     break
 
 for _ in range(int(n)):
-    train_name = input('Введите название поезда: ')
+    train_name = input('Введите id поезда: ')
     while True:
         train_capacity = input('Введите длину поезда: ')
         if train_capacity.isdigit():
