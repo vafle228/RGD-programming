@@ -1,100 +1,27 @@
-import time
-
-
-class Station:
-    def __init__(self, ways):
-        self.ways = ways
-
-    def fill(self, train):
-        s_ways = None
-        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and \
-           (train not in arrived_trains):
-            for way in self.ways:
-                if train.capacity <= way.capacity and way.filling is None \
-                        and (s_ways is None or s_ways.capacity > way.capacity):
-                    s_ways = way
-
-            if s_ways is not None:
-                s_ways.filling = train
-                print('Поезд {train_name} занял линию {name}'.format(name=s_ways.name,
-                                                                         train_name=s_ways.filling.name))
-                return train
-            else:
-                print('Поезд {} не заехал на станцию'.format(train.name))
-                trains.remove(train)
-        return None
-
-    def trains_input(self, trains, function):
-        result = []
-        flag = None
-        for train in trains:
-            flag = function(train)
-            if flag:
-                result.append(flag)
-        return result
-
-    def out_fill(self, train):
-        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.out_time) and \
-           (train in arrived_trains):
-            for way in self.ways:
-                if way.filling is None:
-                    continue
-                elif way.filling.name == train.name:
-                    print('Поезд {train_name} покинул линию {name}'.format(name=way.name,
-                                                                           train_name=way.filling.name))
-                    way.filling = None
-                    return train
-        return None
-
-
-class Way:
-    def __init__(self, capacity, name, train=None):
-        self.capacity = valid(capacity, 'int') or 1
-        self.name = name
-        self.filling = train
-
-
-class Train:
-    def __init__(self, capacity, name, arrive_time, out_time):
-        self.capacity = valid(capacity, 'int') or 1
-        self.name = name
-        self.arrive_time = valid(arrive_time, 'time') or time.strptime('0000', '%H%M')
-        self.out_time = valid(out_time, 'time') or time.strptime('0000', '%H%M')
-
-
-def valid(data, p_type):
-    data = str(data)
-    if p_type == 'int':
-        if data.isdigit() and int(data) >= 0:
-            return int(data)
-        return None
-    if p_type == 'time':
-        try:
-            if ':' in data:
-                data = data.split(':')[0] + data.split(':')[1]
-            return time.strptime(data, '%H%M')
-        except ValueError:
-            return None
-    return None
+from station import Station
+from station_elements import Way, Train
 
 
 ways = [Way(12, 'линия 10'), Way(13, 'Линия 12')]
-trains = [Train(10, 'поезд 1', '00:36', '0037'), Train(10, 'поезд 2', '0036', '0036')]
+trains = [Train(10, 'поезд 1', '1131', '1017'), Train(10, 'поезд 2', '1016', '1004'),
+          Train(10, 'поезд 3', '1016', '1005')]
 station = Station(ways)
 
-arrived_trains = []
 outing_trains = []
 
-while trains or arrived_trains:
+for train in trains:
+    if (train.capacity is None) or (train.name is None) \
+            or (train.arrive_time is None) or (train.out_time is None):
+        trains.remove(train)
 
-    arrived_trains = station.trains_input(trains, station.fill) or arrived_trains
+trains = sorted(trains, key=lambda train: (train.out_time.tm_hour * 60 + train.arrive_time.tm_min), reverse=True)
 
-    for arrived_train in arrived_trains:
+while trains:
+
+    station.fill(trains)
+
+    for arrived_train in station.arrived_trains:
         if arrived_train in trains:
-            trains.remove(arrived_train)
+            trains.remove(station.arrived_train)
 
-    outing_trains = station.trains_input(arrived_trains, station.out_fill)
-
-    for outing_train in outing_trains:
-        arrived_trains.remove(outing_train)
-        outing_trains.remove(outing_train)
+    station.out_fill(trains)
