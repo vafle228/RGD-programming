@@ -2,12 +2,25 @@ from station import Station
 from station_elements import Way, Train
 
 
-ways = [Way(12, 'линия 10'), Way(13, 'Линия 12')]
-trains = [Train(10, 'поезд 1', '1131', '1017'), Train(10, 'поезд 2', '1016', '1004'),
-          Train(10, 'поезд 3', '1016', '1005')]
+def trains_input(trains, function):
+    result = []
+    flag = None
+    for train in trains:
+        flag = function(train)
+        if flag:
+            result.append(flag)
+    return result
+
+
+def trains_cleaner(rubbish, array):
+    for train in rubbish:
+        array.remove(train)
+
+
+ways = [Way(11, 'линия 10'), Way(10, 'Линия 12')]
+trains = [Train(10, '129q', '2300', '2354')]
 station = Station(ways)
 
-outing_trains = []
 
 for train in trains:
     if (train.capacity is None) or (train.name is None) \
@@ -18,10 +31,7 @@ trains = sorted(trains, key=lambda train: (train.out_time.tm_hour * 60 + train.a
 
 while trains:
 
-    station.fill(trains)
+    trains_cleaner(trains_input(trains, station.fill), trains)
 
-    for arrived_train in station.arrived_trains:
-        if arrived_train in trains:
-            trains.remove(station.arrived_train)
+    trains_cleaner(trains_input(station.arrived_trains, station.out_fill), station.arrived_trains)
 
-    station.out_fill(trains)
