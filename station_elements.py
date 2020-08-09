@@ -4,7 +4,7 @@ from functions import valid
 class Way:
     def __init__(self, capacity, name, train=None):
         self.capacity = valid(capacity, 'int')
-        self.name = name
+        self.name = valid(name, 'way_name')
         self.filling = train
 
 
