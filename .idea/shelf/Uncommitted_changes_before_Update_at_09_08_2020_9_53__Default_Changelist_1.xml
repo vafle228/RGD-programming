@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1" date="1596948849954" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 09.08.2020 9:53 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="venv/Scripts/pip.exe" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/pip.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="venv/Scripts/pip3.7.exe" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip3.7.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/pip3.7.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="venv/Scripts/easy_install-3.7.exe" />
+    <option name="AFTER_PATH" value="venv/Scripts/easy_install-3.7.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/easy_install-3.7.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="venv/Scripts/easy_install.exe" />
+    <option name="AFTER_PATH" value="venv/Scripts/easy_install.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/easy_install.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="venv/Scripts/pip3.exe" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip3.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09_08_2020_9_53_[Default_Changelist]1/pip3.exe" />
+  </binary>
+</changelist>
