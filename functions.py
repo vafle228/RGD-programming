@@ -17,7 +17,6 @@ def trains_input(trains, function):
 
 
 def main(trains, station):
-
     for train in trains:
         if (train.capacity is None) or (train.name is None) \
                 or (train.arrive_time is None) or (train.out_time is None):
@@ -36,18 +35,16 @@ def valid(data, p_type):
     if p_type == 'int':
         if data.isdigit() and int(data) >= 0:
             return int(data)
-        print('Некорректные числовые данные')
-        return None
+        raise ValueError('Некорректные числовые данные')
     if p_type == 'time':
+        if ':' in data:
+            data = data.split(':')[0] + data.split(':')[1]
         try:
-            if ':' in data:
-                data = data.split(':')[0] + data.split(':')[1]
             return time.strptime(data, '%H%M')
         except ValueError:
-            print('Некорректные временные данные')
-            return None
+            raise ValueError('Некорректные временные данные')
     if p_type == 'train_name':
         if (len(data) == 4 and data[3].isalpha()) or (len(data) == 5 and data[4].isalpha()):
             return data
-        print('Некорректная форма данных id поезда')
-        return None
+        raise ValueError('Некорректная форма данных id поезда')
+

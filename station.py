@@ -5,14 +5,12 @@ class Station:
     def __init__(self, ways):
         self.ways = ways
         self.arrived_trains = []
-
-        for way in self.ways:
-            if way.name is None:
-                self.ways.remove(way)
+        self.is_test = False
 
     def fill(self, train):
         s_ways = None
-        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and (train not in self.arrived_trains):
+        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.arrive_time) and (train not in self.arrived_trains) \
+                or self.is_test:
             for way in self.ways:
                 if train.capacity <= way.capacity and way.filling is None \
                         and (s_ways is None or s_ways.capacity > way.capacity):
@@ -30,8 +28,8 @@ class Station:
         return None
 
     def out_fill(self, train):
-        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.out_time) and \
-                (train in self.arrived_trains):
+        if (time.strptime(time.strftime('%H%M'), '%H%M') == train.out_time) and (train in self.arrived_trains) \
+                or self.is_test:
             for way in self.ways:
                 if way.filling is None:
                     continue
