@@ -21,8 +21,7 @@ class Station:
             if s_ways is not None:
                 s_ways.filling = train
                 self.arrived_trains.append(train)
-                print('Поезд {train_name} занял линию {name}'.format(name=s_ways.name,
-                                                                     train_name=s_ways.filling.name))
+                print('Поезд {train_name} занял линию {name}'.format(name=s_ways.name, train_name=s_ways.filling.name))
                 return train
             elif sorted(self.ways, key=lambda way: way.capacity, reverse=True)[0].capacity < train.capacity:
                 print('Поезд {} не заехал на станцию'.format(train.name))
@@ -37,8 +36,7 @@ class Station:
                 if way.filling is None:
                     continue
                 elif way.filling.name == train.name:
-                    print('Поезд {train_name} покинул линию {name}'.format(name=way.name,
-                                                                           train_name=way.filling.name))
+                    print('Поезд {train_name} покинул линию {name}'.format(name=way.name, train_name=way.filling.name))
                     way.filling = None
                     return train
         return None

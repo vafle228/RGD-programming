@@ -16,7 +16,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="408ee966-b26f-4105-a8bb-328bb39db29f" name="Default Changelist" comment="test" />
+    <list default="true" id="408ee966-b26f-4105-a8bb-328bb39db29f" name="Default Changelist" comment="test">
+      <change afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/station_elements.py" beforeDir="false" afterPath="$PROJECT_DIR$/station_elements.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,7 +191,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596868451579</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="some technical files">
+      <created>1596949724793</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1596949724793</updated>
+    </task>
+    <task id="LOCAL-00016" summary="some technical files">
+      <created>1596949795353</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1596949795353</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,7 +249,8 @@
     <MESSAGE value="New &quot;valid_input&quot; and fixed bugs" />
     <MESSAGE value="code for testing" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="some technical files" />
+    <option name="LAST_COMMIT_MESSAGE" value="some technical files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="322" y="234" width="1200" height="584" key="DiffContextDialog" timestamp="1596782288425">
