@@ -16,6 +16,45 @@ def trains_input(trains, function):
     return result
 
 
+def valid(data, p_type):
+    data = str(data)
+    if p_type == 'int':
+        return int_check(data)
+    if p_type == 'time':
+        return time_check(data)
+    if p_type == 'train_name':
+        return train_name_check(data)
+    if p_type == 'way_name':
+        return way_name_check(data)
+
+
+def time_check(data):
+    if ':' in data:
+        data = data.split(':')[0] + data.split(':')[1]
+    try:
+        return time.strptime(data, '%H%M')
+    except ValueError:
+        raise ValueError('Некорректные временные данные')
+
+
+def train_name_check(data):
+    if (data[-1].isalpha() and data[0:-1].isdigit()) and (len(data) == 4 or len(data) == 5):
+        return data
+    raise ValueError('Некорректный id')
+
+
+def int_check(data):
+    if data.isdigit() and 0 < int(data) < 100:
+        return int(data)
+    raise ValueError('Некорректные числовые данные')
+
+
+def way_name_check(data):
+    if data.isdigit() and 0 < int(data) < 100:
+        return int(data)
+    raise ValueError('Некорректоное id пути')
+
+
 def main(trains, station):
     for train in trains:
         if (train.capacity is None) or (train.name is None) \
@@ -28,23 +67,3 @@ def main(trains, station):
         trains_cleaner(trains_input(trains, station.fill), trains)
 
         trains_cleaner(trains_input(station.arrived_trains, station.out_fill), station.arrived_trains)
-
-
-def valid(data, p_type):
-    data = str(data)
-    if p_type == 'int':
-        if data.isdigit() and int(data) >= 0:
-            return int(data)
-        raise ValueError('Некорректные числовые данные')
-    if p_type == 'time':
-        if ':' in data:
-            data = data.split(':')[0] + data.split(':')[1]
-        try:
-            return time.strptime(data, '%H%M')
-        except ValueError:
-            raise ValueError('Некорректные временные данные')
-    if p_type == 'train_name':
-        if (len(data) == 4 and data[3].isalpha()) or (len(data) == 5 and data[4].isalpha()):
-            return data
-        raise ValueError('Некорректная форма данных id поезда')
-
