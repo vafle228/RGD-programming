@@ -56,19 +56,11 @@ def dijkstra(costs, parents, graph):
         processed.append(node)
         node = find_lowest_cost_node(costs, processed)
 
-    return format_dijkstra_out(parents, costs['fin'], graph)
+    return parents, cost, graph
 
-graph = Graph()
-graph.add_node()
-graph.add_relation('start', 'a', 6)
-graph.add_relation('start', 'b', 2)
-graph.add_node('a')
-graph.add_node('b')
-graph.add_relation('a', 'fin', 1)
-graph.add_relation('b', 'fin', 2)
-graph.add_node('fin')
 
 parents = create_parents(graph.graph)
 costs = create_costs(graph.graph)
 
 print(dijkstra(costs, parents, graph.graph))
+
